@@ -1,4 +1,4 @@
-package beans;
+package javaBeans;
 
 /**
  * Created by 11656 on 2015/11/5.

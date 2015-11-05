@@ -1,6 +1,6 @@
 package servlet;
 
-import beans.User;
+import javaBeans.User;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,7 +16,8 @@ public class OperatingServlet extends HttpServlet {
         String password = request.getParameter("password");
         user.setUsername(username);
         user.setPassword(password);
-
+        System.out.println("Username" + user.getUsername());
+        System.out.println("Password"+user.getPassword());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

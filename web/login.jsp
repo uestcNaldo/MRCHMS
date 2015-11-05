@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" import="java.util.*" %>
 <%
   String path = request.getContextPath();
-  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <html>
@@ -18,12 +18,6 @@
 </head>
 <body>
 <h1>This is Login JSP</h1>
-<p>
-  path=<%=path%>
-</p>
-<p>
-  basePath=<%=basePath%>
-</p>
 <form method="post" action="servlet/OperateingServlet">
   <label>
     <span>UserName:</span><input type="text" name="username">
