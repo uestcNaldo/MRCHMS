@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by 11656 on 2015/10/30.
  */
-public class DBUtill {
+public class DBUtil {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/MRIMS";
     private static final String database_username = "root";
