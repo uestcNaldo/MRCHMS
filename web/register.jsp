@@ -30,10 +30,10 @@
   <form method="post" action="${pageContext.request.contextPath}/servlet/OperateingServlet?action=register" id="register-form">
     <div>
       Select Role:<label>
-      <input type="radio" name="role" value="doctor">
+      <input type="radio" name="role" value="doctors">
     </label> Doctor
       <label>
-        <input type="radio" name="role" value="patient">
+        <input type="radio" name="role" value="patients">
       </label> Patient
     </div>
     <div class="register-username">

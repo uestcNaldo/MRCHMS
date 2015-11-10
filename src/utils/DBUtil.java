@@ -13,7 +13,7 @@ public class DBUtil {
     private static final String database_username = "root";
     private static final String database_password = "1358";
 
-    private static Connection conn = null;
+    public static Connection conn = null;
 
     static {
         try {
