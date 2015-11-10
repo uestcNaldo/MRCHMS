@@ -1,0 +1,21 @@
+body {
+    background-color: #EEEEEE;
+    padding: 80px 100px;
+}
+
+.register-head {
+    text-align: center;
+}
+.register-head>.head-title {
+    font-family: Arial;
+    font-weight: 500;
+}
+.register-head>.head-instrct {
+    font-family: Arial;
+}
+
+.register-body {
+    margin-top: 50px;
+    text-align: center;
+
+}
