@@ -1,4 +1,4 @@
-package utills;
+package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +18,8 @@ public class DBUtil {
     static {
         try {
             Class.forName(driver);
-        } catch (ClassNotFoundException e) {
+            getConnection();
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }

@@ -19,22 +19,46 @@ public class OperatingServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         switch (request.getParameter("action")){
             case "login":{
+                User user = new User();
+                String username = request.getParameter("login-username");
+                String password = request.getParameter("login-password");
+                user.setUsername(username);
+                user.setPassword(password);
                 if (request.getParameter("ID").equals("doctor")) {
                     System.out.println("ID:"+request.getParameter("ID"));
                     //Detect ID is Doctor
+                    user.setRole("doctor");
                 }
                 if (request.getParameter("ID").equals("patient")){
                     System.out.println("ID:"+request.getParameter("ID"));
                     //Detect ID is patient
-                }
+                    user.setRole("patient");
 
+                }
+                break;
+            }
+            case "toRegister":{
+                System.out.println("Action:"+request.getParameter("action"));
+                response.sendRedirect(request.getContextPath()+"/register.jsp");
                 break;
             }
             case "register":{
                 System.out.println("Action:"+request.getParameter("action"));
-                response.sendRedirect(request.getContextPath()+"/register.jsp");
+                User user = new User();
+                String role = request.getParameter("role");
+                System.out.println("role:"+role);
+                String username = request.getParameter("register-username");
+                String password = request.getParameter("register-password");
+                String name = request.getParameter("register-name");
+                int age = Integer.parseInt(request.getParameter("age"));
+                String gender = request.getParameter("sex");
+                user.setRole(role);
+                user.setUsername(username);
+                user.setPassword(password);
+                user.setName(name);
+                user.setAge(age);
+                user.setGender(gender);
 
-                break;
             }
             default:break;
         }

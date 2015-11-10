@@ -36,7 +36,7 @@
 </div>
 
 <div class="login-table">
-  <form method="post" action="servlet/OperateingServlet?action=login" id="login-form">
+  <form method="post" action="${pageContext.request.contextPath}/servlet/OperateingServlet?action=login" id="login-form">
     <div class="login-username">
       UserName:&nbsp;<input type="text" name="login-username">
     </div>
@@ -46,7 +46,7 @@
     <input type="submit" value="Doctor-Login" class="login-submit" onclick="detectID(0)">
     <input type="submit" value="Patient-Login" class="login-submit" onclick="detectID(1)">
   </form>
-  <form method="post" action="servlet/OperateingServlet?action=register">
+  <form method="post" action="servlet/OperateingServlet?action=toRegister">
     <input type="submit" value="Register" class="register-submit">
   </form>
 </div>

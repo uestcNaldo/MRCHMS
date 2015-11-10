@@ -19,3 +19,27 @@ body {
     text-align: center;
 
 }
+
+.register-username {
+    margin-top: 20px;
+}
+
+.register-password {
+    margin-top: 20px;
+}
+
+.register-name {
+    margin-top: 20px;
+}
+
+.register-age {
+    margin-top: 20px;
+}
+
+.register-gender {
+    margin-top: 20px;
+}
+
+.register-submit {
+    margin-top: 20px;
+}

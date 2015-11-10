@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="MySQL - MRIMS@localhost" uuid="8b59006a-be26-4ba9-a651-842403c9fe8d">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="MySQL" version="5.6.27-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="mrims"/>
+    <table name="doctors" schema="" catalog="mrims" type="TABLE">
+      <column name="d_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="d_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="d_age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="d_gender" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="d_id"/>
+      <exported-key name="id_relation_d" table="users" schema="" catalog="mrims" columns="r_id"/>
+    </table>
+    <table name="patients" schema="" catalog="mrims" type="TABLE">
+      <column name="p_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="p_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="p_age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="p_gender" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="p_id"/>
+      <exported-key name="id_relation_p" table="users" schema="" catalog="mrims" columns="r_id"/>
+    </table>
+    <table name="users" schema="" catalog="mrims" type="TABLE">
+      <column name="u_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="u_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="u_password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="r_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="u_id"/>
+      <foreign-key name="id_relation_d" columns="r_id" ref-table="doctors" ref-schema="" ref-catalog="mrims" ref-columns="d_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="id_relation_p" columns="r_id" ref-table="patients" ref-schema="" ref-catalog="mrims" ref-columns="p_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="id_relation_idx" unique="false" columns="r_id"/>
+    </table>
   </data-source>
 </component>
