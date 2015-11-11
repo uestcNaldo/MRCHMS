@@ -10,15 +10,6 @@
 <head>
   <title>Register - Medical Record Information Management System</title>
   <link href="css/register.css" rel="stylesheet">
-  <script language="JavaScript">
-    function compPassword(password_conf){
-      var password = document.getElementById("password_conf").value;
-      var hint = document.getElementById("confPass");
-      if(password != password_conf){
-        hint.innerHTML = "Passwords don't match";
-      }
-    }
-  </script>
 </head>
 <body>
 <div class="register-head">
@@ -43,12 +34,7 @@
     </div>
     <div class="register-password">
       <label>
-        Password:&nbsp;&nbsp;&nbsp;<input type="text" name="register-password" id="password"  onkeyup="compPassword(this.value)"required>
-      </label>
-    </div>
-    <div class="register-password">
-      <label>
-        Confirm Password:&nbsp;&nbsp;<input type="text" name="register-confPassword" id="password_conf" required><span id="confPass"></span>
+        Password:&nbsp;&nbsp;&nbsp;<input type="text" name="register-password" id="password" required>
       </label>
     </div>
     <div class="register-name">

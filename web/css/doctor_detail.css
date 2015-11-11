@@ -1,0 +1,24 @@
+body {
+    margin-top: 50px;
+}
+.detail-head {
+    text-align: center;
+}
+
+.detail-doctor {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.detail-name {
+    margin-top: 5px;
+}
+
+.doctor-search {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.patients-list {
+    text-align: center;
+}

@@ -13,22 +13,15 @@ public class DBUtil {
     private static final String database_username = "root";
     private static final String database_password = "1358";
 
-    public static Connection conn = null;
-
     static {
         try {
             Class.forName(driver);
-            getConnection();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public static Connection getConnection() throws SQLException {
-        if (conn==null){
-            conn = DriverManager.getConnection(URL,database_username,database_password);
-            return conn;
-        }
-        return conn;
+    public static Connection getConnect() throws SQLException {
+        return DriverManager.getConnection(URL, database_username, database_password);
     }
 
 }
