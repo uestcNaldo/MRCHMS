@@ -131,19 +131,25 @@ public class OperatingServlet extends HttpServlet {
                     rs.last();
                     r_id = rs.getString(1);
                 }
-            }
 
+            }
             pstate = conn.prepareStatement("INSERT INTO users(u_name, u_password, r_id) VALUES (?,?,?)");
             pstate.setString(1,user.getUsername());
             pstate.setString(2,user.getPassword());
             pstate.setString(3,r_id);
             System.out.println("r_id:"+r_id);
             pstate.executeUpdate();
+
+            pstate = conn.prepareStatement("INSERT INTO mrecords(p_id) VALUES ?");
+            pstate.setString(1,r_id);
+            pstate.executeUpdate();
+
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             pstate.close();
+            conn.close();
         }
 
     }
@@ -152,32 +158,42 @@ public class OperatingServlet extends HttpServlet {
             stmt = (Statement) conn.createStatement();
             ResultSet rs = null;
             if (user.getRole().equals("doctors")) {
-                rs = stmt.executeQuery("SELECT d_name,d_age,d_gender FROM doctors WHERE d_id=(SELECT r_id FROM users WHERE r_id LIKE 'd%' AND u_name=" + user.getUsername() + " AND u_password=" + user.getPassword() + ")");
+                rs = stmt.executeQuery("SELECT d_name,d_age,d_gender FROM doctors WHERE d_id=(SELECT r_id FROM users WHERE r_id LIKE 'd%' AND u_name='"+user.getUsername()+"' AND u_password='"+user.getPassword()+"')");
                 if (!rs.next()) {
                     System.out.println("Login Failed");
                     response.sendRedirect(request.getContextPath() + "/login_failed.jsp");
+                    return;
                 }
-                if (rs.next()) {
-                    user.setName(rs.getString(1));
-                    user.setAge(rs.getInt(2));
-                    user.setGender(rs.getString(3));
-                }
+                user.setName(rs.getString(1));
+                user.setAge(rs.getInt(2));
+                user.setGender(rs.getString(3));
+
+                System.out.println("Name:"+user.getName());
+                System.out.println("Age:"+user.getAge());
+                System.out.println("Gender:"+user.getGender());
+
                 request.setAttribute("d_name",user.getName());
                 request.setAttribute("d_age",user.getAge());
                 request.setAttribute("d_gender",user.getGender());
                 request.getRequestDispatcher("/doctor_detail.jsp").forward(request,response);
             }
             if (user.getRole().equals("patients")){
-                rs = stmt.executeQuery("SELECT p_name,p_age,p_gender FROM patients WHERE p_id=(SELECT r_id FROM users WHERE r_id LIKE 'p%' AND u_name=" + user.getUsername() + " AND u_password=" + user.getPassword() + ")");
+                String p_id = null;
+                rs = stmt.executeQuery("SELECT p_name,p_age,p_gender,p_id FROM patients WHERE p_id=(SELECT r_id FROM users WHERE r_id LIKE 'p%' AND u_name='" + user.getUsername() + "' AND u_password='" + user.getPassword() + "')");
                 if (!rs.next()) {
                     System.out.println("Login Failed");
                     response.sendRedirect(request.getContextPath() + "/login_failed.jsp");
                 }
-                if (rs.next()) {
-                    user.setName(rs.getString(1));
-                    user.setAge(rs.getInt(2));
-                    user.setGender(rs.getString(3));
-                }
+                user.setName(rs.getString(1));
+                user.setAge(rs.getInt(2));
+                user.setGender(rs.getString(3));
+                p_id = rs.getString(4);
+
+                request.setAttribute("p_name",user.getName());
+                request.setAttribute("p_age",user.getAge());
+                request.setAttribute("p_gender",user.getGender());
+                rs = stmt.executeQuery("SELECT m_cc,m_curh,m_lsth,m_perh,m_famh FROM mrecords WHERE p_id='"+ p_id +"'");
+
 
             }
             rs.close();
