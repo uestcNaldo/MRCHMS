@@ -10,10 +10,25 @@ public class User {
     private String name;
     private int age;
     private String gender;
+    private String id;
 
     public User(){
-
+        username = null;
+        password = null;
+        role = null;
+        name = null;
+        age = 0;
+        gender = null;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

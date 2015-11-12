@@ -13,18 +13,16 @@
       <column name="d_age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="d_gender" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="d_id"/>
-      <exported-key name="id_rel_d" table="users" schema="" catalog="mrims" columns="r_id"/>
     </table>
     <table name="mrecords" schema="" catalog="mrims" type="TABLE">
       <column name="m_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="m_cc" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="m_curh" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
-      <column name="m_lsth" sqlType="VARCHAR" precision="300" scale="0" nullable="true" jdbcType="12"/>
-      <column name="m_perh" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="m_curh" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="m_lsth" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="m_perh" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
       <column name="m_famh" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="p_id" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="p_id" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="m_id"/>
-      <foreign-key name="id_rel_pToM" columns="p_id" ref-table="patients" ref-schema="" ref-catalog="mrims" ref-columns="p_id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="id_rel_pToM_idx" unique="false" columns="p_id"/>
     </table>
     <table name="patients" schema="" catalog="mrims" type="TABLE">
@@ -33,8 +31,6 @@
       <column name="p_age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="p_gender" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="p_id"/>
-      <exported-key name="id_rel_pToM" table="mrecords" schema="" catalog="mrims" columns="p_id"/>
-      <exported-key name="id_rel_p" table="users" schema="" catalog="mrims" columns="r_id"/>
     </table>
     <table name="users" schema="" catalog="mrims" type="TABLE">
       <column name="u_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -42,9 +38,6 @@
       <column name="u_password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
       <column name="r_id" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="u_id"/>
-      <foreign-key name="id_rel_d" columns="r_id" ref-table="doctors" ref-schema="" ref-catalog="mrims" ref-columns="d_id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="id_rel_p" columns="r_id" ref-table="patients" ref-schema="" ref-catalog="mrims" ref-columns="p_id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="id_rel_d_idx" unique="false" columns="r_id"/>
     </table>
   </data-source>
 </component>

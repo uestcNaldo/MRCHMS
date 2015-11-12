@@ -43,3 +43,7 @@ body {
 .register-submit {
     margin-top: 20px;
 }
+
+.register-success {
+    text-align: center;
+}

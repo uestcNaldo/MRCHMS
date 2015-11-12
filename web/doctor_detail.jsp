@@ -18,7 +18,7 @@
 <html>
 <head>
   <title>Doctor Details --- Medical Record Information Management System</title>
-  <base href="<%=basePath%>">
+  <base href="<%=basePath%>" target="_blank">
   <link href="css/doctor_detail.css" rel="stylesheet">
 </head>
 <body>
@@ -29,13 +29,13 @@
 
 <div class="detail-doctor">
   <div class="detail-name">
-    <p>Name:</p><span id="doctor-name"><%=d_name%></span>
+    <p>Name:<span id="doctor-name"><%=d_name%></span></p>
   </div>
   <div class="detail-name">
-    <p>Age:</p><span id="doctor-age"><%=d_age%></span>
+    <p>Age:<span id="doctor-age"><%=d_age%></span></p>
   </div>
   <div class="detail-name">
-    <p>Gender:</p><span id="doctor-gender"><%=d_gender%></span>
+    <p>Gender:<span id="doctor-gender"><%=d_gender%></span></p>
   </div>
 </div>
 
@@ -43,21 +43,8 @@
   <form method="post" action="${pageContext.request.contextPath}/servlet/OperateingServlet?action=search" id="search-form">
     <input type="text" name="search-name">
     <span><input type="submit" value="Search"></span>
+    <p>Input patient name to search.</p>
   </form>
-</div>
-<div class="patients-list">
-  <table id="pTable" width="80%">
-    <tr>
-      <th>Name</th>
-      <th>Gender</th>
-      <th>Age</th>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
 </div>
 </body>
 </html>

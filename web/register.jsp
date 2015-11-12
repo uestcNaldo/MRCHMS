@@ -6,9 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
   <title>Register - Medical Record Information Management System</title>
+  <base href="<%=basePath%>" target="_blank">
   <link href="css/register.css" rel="stylesheet">
 </head>
 <body>

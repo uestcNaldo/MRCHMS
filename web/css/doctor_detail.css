@@ -11,14 +11,10 @@ body {
 }
 
 .detail-name {
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 .doctor-search {
     text-align: center;
     margin-top: 20px;
-}
-
-.patients-list {
-    text-align: center;
 }

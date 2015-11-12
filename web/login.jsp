@@ -14,7 +14,7 @@
 <html>
 <head>
   <title>Login --- Medical Record Information Management System</title>
-  <base href="<%=basePath%>">
+  <base href="<%=basePath%>" target="_blank">
   <link href="css/login.css" rel="stylesheet">
   <script language="JavaScript">
     function detectID(id){
