@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -220,35 +219,27 @@ public class OperatingServlet extends HttpServlet {
     public void regToDB(HttpServletRequest request, HttpServletResponse response,User user) throws SQLException, IOException {
         int flag = 0;
         String r_id = null;
-        ResultSet rs = null;
         try {
             if (user.getRole().equals("doctors")){
                 pstate = conn.prepareStatement("INSERT INTO doctors(d_id, d_name, d_age, d_gender) VALUES (?,?,?,?)");
-                pstate.setString(1, "d"+UUID.randomUUID().toString());
+                r_id = "d"+UUID.randomUUID().toString();
+                pstate.setString(1,r_id);
                 pstate.setString(2,user.getName());
                 pstate.setInt(3,user.getAge());
                 pstate.setString(4,user.getGender());
                 flag = pstate.executeUpdate();
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM doctors");
-                if (rs.next()){
-                    rs.last();
-                    r_id = rs.getString(1);
-                }
+
             }
             if (user.getRole().equals("patients")){
                 pstate = conn.prepareStatement("INSERT INTO patients(p_id, p_name, p_age, p_gender) VALUES (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-                pstate.setString(1,"p"+UUID.randomUUID().toString());
+                r_id = "p"+UUID.randomUUID().toString();
+                pstate.setString(1,r_id);
                 pstate.setString(2,user.getName());
                 pstate.setInt(3,user.getAge());
                 pstate.setString(4,user.getGender());
                 flag=pstate.executeUpdate();
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM patients");
-                if (rs.next()){
-                    rs.last();
-                    r_id = rs.getString(1);
-                }
+
+
                 pstate = conn.prepareStatement("INSERT INTO mrecords(p_id) VALUES (?)");
                 pstate.setString(1,r_id);
                 pstate.executeUpdate();
@@ -260,8 +251,6 @@ public class OperatingServlet extends HttpServlet {
             pstate.setString(3,r_id);
             System.out.println("r_id:"+r_id);
             pstate.executeUpdate();
-            rs.close();
-
             response.sendRedirect(request.getContextPath()+"/register_successfully.jsp");
         } catch (SQLException e) {
             e.printStackTrace();

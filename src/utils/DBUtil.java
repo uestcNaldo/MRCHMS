@@ -12,7 +12,7 @@ public class DBUtil {
     private static final String URL = "jdbc:mysql://localhost:3306/MRIMS";
     private static final String database_username = "root";
     private static final String database_password = "1358";
-
+    private static final String database_charset = "utf8";
     static {
         try {
             Class.forName(driver);
@@ -21,7 +21,9 @@ public class DBUtil {
         }
     }
     public static Connection getConnect() throws SQLException {
-        return DriverManager.getConnection(URL, database_username, database_password);
+        Connection conn =null;
+        conn = DriverManager.getConnection(URL, database_username, database_password);
+        return conn;
     }
 
 }

@@ -39,7 +39,7 @@
     </div>
     <div class="register-password">
       <label>
-        Password:&nbsp;&nbsp;&nbsp;<input type="text" name="register-password" id="password" required>
+        Password:&nbsp;&nbsp;&nbsp;<input type="password" name="register-password" id="password" required>
       </label>
     </div>
     <div class="register-name">

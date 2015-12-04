@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mrims" default="compile.module.mrims">
+  <dirname property="module.mrims.basedir" file="${ant.file.module_mrims}"/>
+  
+  <property name="module.jdk.home.mrims" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mrims" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mrims" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mrims" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="mrims.output.dir" value="${module.mrims.basedir}/web/WEB-INF/classes"/>
+  <property name="mrims.testoutput.dir" value="${module.mrims.basedir}/web/WEB-INF/classes"/>
+  
+  <path id="mrims.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mrims.module.production.classpath">
+    <path refid="${module.jdk.classpath.mrims}"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <fileset dir="${basedir}/web/WEB-INF/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="mrims.runtime.production.module.classpath">
+    <pathelement location="${mrims.output.dir}"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <fileset dir="${basedir}/web/WEB-INF/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="mrims.module.classpath">
+    <path refid="${module.jdk.classpath.mrims}"/>
+    <pathelement location="${mrims.output.dir}"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <fileset dir="${basedir}/web/WEB-INF/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="mrims.runtime.module.classpath">
+    <pathelement location="${mrims.output.dir}"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <fileset dir="${basedir}/web/WEB-INF/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mrims">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mrims">
+    <patternset refid="excluded.from.module.mrims"/>
+  </patternset>
+  
+  <path id="mrims.module.sourcepath">
+    <dirset dir="${module.mrims.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mrims" depends="compile.module.mrims.production,compile.module.mrims.tests" description="Compile module MRIMS"/>
+  
+  <target name="compile.module.mrims.production" depends="register.custom.compilers" description="Compile module MRIMS; production classes">
+    <mkdir dir="${mrims.output.dir}"/>
+    <javac2 destdir="${mrims.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mrims}/javac">
+      <compilerarg line="${compiler.args.mrims}"/>
+      <bootclasspath refid="mrims.module.bootclasspath"/>
+      <classpath refid="mrims.module.production.classpath"/>
+      <src refid="mrims.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mrims"/>
+    </javac2>
+    
+    <copy todir="${mrims.output.dir}">
+      <fileset dir="${module.mrims.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mrims.tests" depends="register.custom.compilers,compile.module.mrims.production" description="compile module MRIMS; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.mrims" description="cleanup module">
+    <delete dir="${mrims.output.dir}"/>
+    <delete dir="${mrims.testoutput.dir}"/>
+  </target>
+</project>
